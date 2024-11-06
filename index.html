@@ -11,10 +11,35 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
+     <!-- Vue applikationens rod-element, her monteres hele Vue app'en. Alle Vue-komponenter ligger indenfor dette element -->
     <div id="app"> 
         <div class="nav-bar"></div>
-    
+        <!-- Vue data binding: `intro` er defineret i main.js og vises dynamisk her -->
         <h1>{{intro}}</h1>
+
+        <!-- Input-felter til at tilføje nye personer til listen -->
+        <div>Navn: <input v-model="navn"></div><!-- Data-binding med v-model til navn -->
+        <div>Id:   <input v-model="id"></div><!-- Data-binding med v-model til id -->
+
+        <!-- Viser de aktuelle værdier for navn og id dynamisk -->
+        <div>Navn: {{navn}}</div>
+        <div>Id: {{id}}</div>
+
+        <!-- Knap, der tilføjer en ny person til listen ved at kalde addMethod i main.js -->
+        <button v-on:click="addMethod">Add Button</button>
+
+        <!-- Liste over personer i `liste` data-objektet, hver person vises med navn og id -->
+        <ul>
+            <!-- `v-for` bruges til at loope igennem `liste`, og `v-bind:key` bruges for at forbedre performance -->
+            <li v-for="person in liste" v-bind:key="person.id">
+                {{person.navn}} - {{person.id}} 
+                <!-- Knap til at slette en person fra listen ved at kalde deleteMethod med person.id som parameter -->
+                <button v-on:click="deleteMethod(person.id)">Slet</button>
+            </li>
+        </ul>
+
+    
+        
 
     </div>
     
